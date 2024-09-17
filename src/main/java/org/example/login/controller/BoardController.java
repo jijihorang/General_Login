@@ -29,7 +29,7 @@ public class BoardController {
     private final BoardService boardService;
 
     @PreAuthorize("hasRole('ROLE_USER')")
-    @PostMapping("register")
+    @PostMapping("/register")
     public String register(
             BoardRegisterDTO boardRegisterDTO,
             RedirectAttributes rttr) {
@@ -49,13 +49,13 @@ public class BoardController {
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
-    @GetMapping("register")
+    @GetMapping("/register")
     public void register(){
 
     }
 
     @PreAuthorize("permitAll()")
-    @GetMapping("list")
+    @GetMapping("/list")
     public void list(PageRequest pageRequest, Model model) {
 
         model.addAttribute("result", boardService.list(pageRequest));
@@ -63,7 +63,7 @@ public class BoardController {
     }
 
     @PreAuthorize("isAuthenticated()") // 로그인된 사용자만 호출할 수 있도록 제한
-    @GetMapping("read/{bno}")
+    @GetMapping("/read/{bno}")
     public String read (@CookieValue(required = false, value = "view", defaultValue = "") String viewValue, @PathVariable("bno") Long bno, Model model) {
 
         log.info("Reading board: " + bno);
@@ -88,5 +88,10 @@ public class BoardController {
         model.addAttribute("board", boardReadDTO);
 
         return "/board/read";
+    }
+
+    @GetMapping("/ex1")
+    public void ex1(Model model) {
+        log.info("ex1");
     }
 }
