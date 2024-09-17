@@ -5,7 +5,7 @@ spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
     username: malldbuser
-    password: malldbuser
+    password: 
     url: jdbc:mariadb://localhost:3306/malldb
 
     hikari:
